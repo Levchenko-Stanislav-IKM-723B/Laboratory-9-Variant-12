@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    // Визначимо розміри масиву
+    const int rows = 4;
+    const int cols = 5;
+
+    // Створюємо двовимірний масив
+    int array[rows][cols] = {
+        {0, 10, 20, 30, 40},
+        {1, 2, 3, 4, 5},
+        {6, 7, 8, 9, 0},
+        {10, 11, 12, 13, 14}
+    };
+
+    // Вектор для зберігання середніх арифметичних значень рядків
+    vector<double> averages(rows, 0.0);
+
+    for (int i = 0; i < rows; ++i) {
+        int sum = 0;
+        bool hasZero = false;
+        int countMultiplesOfFive = 0;
+        for (int j = 0; j < cols; ++j) {
+            sum += array[i][j];
+            if (array[i][j] == 0) {
+                hasZero = true;
+            }
+            if (array[i][j] % 5 == 0) {
+                countMultiplesOfFive++;
+            }
+        }
+        averages[i] = static_cast<double>(sum) / cols;
+
+        if (hasZero) {
+            cout << "Row " << i << " has " << countMultiplesOfFive << " elements multiple of 5." << endl;
+        }
+    }
+
+    cout << "Averages of each row: ";
+    for (double avg : averages) {
+        cout << avg << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
