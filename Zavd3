@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
@@ -10,8 +9,11 @@ int main() {
     cout << "Enter the number of columns: ";
     cin >> cols;
 
-    // Створюємо двовимірний масив
-    vector<vector<int>> array(rows, vector<int>(cols));
+    // Створюємо двовимірний масив динамічно
+    int** array = new int*[rows];
+    for (int i = 0; i < rows; ++i) {
+        array[i] = new int[cols];
+    }
 
     // Введення елементів масиву користувачем
     cout << "Enter the elements of the matrix:" << endl;
@@ -23,7 +25,7 @@ int main() {
 
     // Знаходження суми додатних елементів головної діагоналі
     int positiveSum = 0;
-    int minDimension = min(rows, cols); // Обмеження діагоналі найменшою розмірністю
+    int minDimension = (rows < cols) ? rows : cols; // Обмеження діагоналі найменшою розмірністю
     for (int i = 0; i < minDimension; ++i) {
         if (array[i][i] > 0) {
             positiveSum += array[i][i];
@@ -40,6 +42,12 @@ int main() {
         }
     }
     cout << endl;
+
+    // Вивільнення пам'яті
+    for (int i = 0; i < rows; ++i) {
+        delete[] array[i];
+    }
+    delete[] array;
 
     return 0;
 }
