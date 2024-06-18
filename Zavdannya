@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
@@ -15,8 +14,8 @@ int main() {
         {10, 11, 12, 13, 14}
     };
 
-    // Вектор для зберігання середніх арифметичних значень рядків
-    vector<double> averages(rows, 0.0);
+    // Масив для зберігання середніх арифметичних значень рядків
+    double averages[rows] = {0.0};
 
     for (int i = 0; i < rows; ++i) {
         int sum = 0;
@@ -39,8 +38,8 @@ int main() {
     }
 
     cout << "Averages of each row: ";
-    for (double avg : averages) {
-        cout << avg << " ";
+    for (int i = 0; i < rows; ++i) {
+        cout << averages[i] << " ";
     }
     cout << endl;
 
